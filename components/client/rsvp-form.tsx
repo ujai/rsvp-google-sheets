@@ -7,7 +7,6 @@ import { rsvpSchema, type RSVPFormData } from "@/lib/validations";
 import { submitRSVP } from "@/app/actions/rsvp";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -24,7 +23,6 @@ interface RSVPFormProps {
 
 export function RSVPForm({ onSuccess }: RSVPFormProps) {
   const [isPending, startTransition] = useTransition();
-  const [attendanceStatus, setAttendanceStatus] = useState<"hadir" | "tidak_hadir" | null>(null);
 
   const form = useForm<RSVPFormData>({
     resolver: zodResolver(rsvpSchema),
@@ -35,6 +33,8 @@ export function RSVPForm({ onSuccess }: RSVPFormProps) {
     },
   });
 
+  const watchedStatus = form.watch("statusKehadiran");
+
   const onSubmit = (data: RSVPFormData) => {
     startTransition(async () => {
       const result = await submitRSVP(data);
@@ -43,7 +43,6 @@ export function RSVPForm({ onSuccess }: RSVPFormProps) {
         toast.success(result.message);
         onSuccess(result.data.editLink);
         form.reset();
-        setAttendanceStatus(null);
       } else {
         toast.error(result.message || "Ralat tidak dijangka berlaku.");
 
@@ -63,21 +62,10 @@ export function RSVPForm({ onSuccess }: RSVPFormProps) {
   };
 
   const handleStatusChange = (status: "hadir" | "tidak_hadir") => {
-    // Mutually exclusive checkbox behavior
-    if (attendanceStatus === status) {
-      // Uncheck if clicking the same checkbox
-      setAttendanceStatus(null);
-      form.setValue("statusKehadiran", "" as "hadir" | "tidak_hadir");
+    form.setValue("statusKehadiran", status);
+    // Clear bilanganOrang if "tidak_hadir" is selected
+    if (status === "tidak_hadir") {
       form.setValue("bilanganOrang", undefined);
-    } else {
-      // Check the new status and uncheck the other
-      setAttendanceStatus(status);
-      form.setValue("statusKehadiran", status);
-
-      // Clear bilanganOrang if "tidak_hadir" is selected
-      if (status === "tidak_hadir") {
-        form.setValue("bilanganOrang", undefined);
-      }
     }
   };
 
@@ -106,24 +94,26 @@ export function RSVPForm({ onSuccess }: RSVPFormProps) {
           )}
         />
 
-        {/* Attendance Status Checkboxes */}
+        {/* Attendance Status Radio Buttons */}
         <FormField
           control={form.control}
           name="statusKehadiran"
-          render={({ field: _field }) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel className="text-base font-medium text-baby-blue-dark">
                 Status Kehadiran *
               </FormLabel>
               <div className="space-y-3 mt-2">
-                {/* Hadir Checkbox */}
+                {/* Hadir Radio */}
                 <div className="flex items-center space-x-3">
-                  <Checkbox
+                  <input
+                    type="radio"
                     id="hadir"
-                    checked={attendanceStatus === "hadir"}
-                    onCheckedChange={() => handleStatusChange("hadir")}
+                    value="hadir"
+                    checked={field.value === "hadir"}
+                    onChange={() => handleStatusChange("hadir")}
                     disabled={isPending}
-                    className="border-baby-blue data-[state=checked]:bg-baby-blue data-[state=checked]:border-baby-blue"
+                    className="h-4 w-4 border-baby-blue text-baby-blue focus:ring-baby-blue focus:ring-2 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
                   />
                   <label
                     htmlFor="hadir"
@@ -133,14 +123,16 @@ export function RSVPForm({ onSuccess }: RSVPFormProps) {
                   </label>
                 </div>
 
-                {/* Tidak Hadir Checkbox */}
+                {/* Tidak Hadir Radio */}
                 <div className="flex items-center space-x-3">
-                  <Checkbox
+                  <input
+                    type="radio"
                     id="tidak_hadir"
-                    checked={attendanceStatus === "tidak_hadir"}
-                    onCheckedChange={() => handleStatusChange("tidak_hadir")}
+                    value="tidak_hadir"
+                    checked={field.value === "tidak_hadir"}
+                    onChange={() => handleStatusChange("tidak_hadir")}
                     disabled={isPending}
-                    className="border-baby-blue data-[state=checked]:bg-baby-blue data-[state=checked]:border-baby-blue"
+                    className="h-4 w-4 border-baby-blue text-baby-blue focus:ring-baby-blue focus:ring-2 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
                   />
                   <label
                     htmlFor="tidak_hadir"
@@ -156,7 +148,7 @@ export function RSVPForm({ onSuccess }: RSVPFormProps) {
         />
 
         {/* Conditional Number of People Field */}
-        {attendanceStatus === "hadir" && (
+        {watchedStatus === "hadir" && (
           <FormField
             control={form.control}
             name="bilanganOrang"
