@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
 import { EVENT_DETAILS } from "@/lib/constants";
 
 /**
