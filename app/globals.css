@@ -1,26 +1,71 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Base colors */
+  --background: #faf9f6; /* Cream background */
+  --foreground: #1f2937; /* Dark gray text */
+
+  /* Baby Blue Theme - Majlis Aqiqah */
+  --baby-blue: #a4c8e1; /* Primary baby blue */
+  --baby-blue-light: #c8dcea; /* Light blue for gingham */
+  --baby-blue-dark: #8fa8b8; /* Soft gray-blue for text */
+
+  /* Accent colors */
+  --gold: #d4af37; /* Gold for Islamic accents */
+  --cream: #faf9f6; /* Warm background */
+
+  /* Status colors */
+  --success: #10b981; /* Green for "Hadir" */
+  --error: #ef4444; /* Red for errors */
+  --warning: #f59e0b; /* Orange for warnings */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* Custom baby blue colors */
+  --color-baby-blue: var(--baby-blue);
+  --color-baby-blue-light: var(--baby-blue-light);
+  --color-baby-blue-dark: var(--baby-blue-dark);
+  --color-gold: var(--gold);
+  --color-cream: var(--cream);
+
+  /* Status colors */
+  --color-success: var(--success);
+  --color-error: var(--error);
+  --color-warning: var(--warning);
+
+  /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Keep light theme for this project - it's a baby celebration */
+    --background: #faf9f6;
+    --foreground: #1f2937;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+@layer base {
+  * {
+    @apply border-baby-blue-light;
+  }
+  body {
+    @apply bg-cream text-foreground;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }
