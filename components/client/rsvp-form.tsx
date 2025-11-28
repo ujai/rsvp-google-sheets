@@ -37,41 +37,56 @@ export function RSVPForm({ onSuccess }: RSVPFormProps) {
 
   const onSubmit = (data: RSVPFormData) => {
     startTransition(async () => {
-      const result = await submitRSVP(data);
+      try {
+        console.log("[RSVPForm] Submitting RSVP:", data);
+        const result = await submitRSVP(data);
+        console.log("[RSVPForm] Server response:", result);
 
-      if (result.success && result.data) {
-        toast.success(result.message);
-        onSuccess(result.data.editLink);
-        form.reset();
-      } else {
-        toast.error(result.message || "Ralat tidak dijangka berlaku.");
+        if (result.success && result.data) {
+          toast.success(result.message);
+          onSuccess(result.data.editLink);
+          form.reset();
+        } else {
+          toast.error(result.message || "Ralat tidak dijangka berlaku.");
 
-        // Set field errors if available
-        if (result.errors) {
-          Object.entries(result.errors).forEach(([field, message]) => {
-            if (message) {
-              form.setError(field as keyof RSVPFormData, {
-                type: "manual",
-                message,
-              });
-            }
-          });
+          // Set field errors if available
+          if (result.errors) {
+            Object.entries(result.errors).forEach(([field, message]) => {
+              if (message) {
+                form.setError(field as keyof RSVPFormData, {
+                  type: "manual",
+                  message,
+                });
+              }
+            });
+          }
         }
+      } catch (error) {
+        console.error("[RSVPForm] Submission error:", error);
+        toast.error("Ralat tidak dijangka berlaku. Sila cuba lagi.");
       }
     });
   };
 
-  const handleStatusChange = (status: "hadir" | "tidak_hadir") => {
-    form.setValue("statusKehadiran", status);
+  const handleStatusChange = (status: "hadir" | "tidak_hadir", onChange: (value: any) => void) => {
+    console.log("[RSVPForm] Status changed to:", status);
+    // Call field.onChange to properly update react-hook-form state
+    onChange(status);
     // Clear bilanganOrang if "tidak_hadir" is selected
     if (status === "tidak_hadir") {
       form.setValue("bilanganOrang", undefined);
     }
   };
 
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("[RSVPForm] Form submit event triggered");
+    form.handleSubmit(onSubmit)(e);
+  };
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={handleFormSubmit} className="space-y-6">
         {/* Name Field */}
         <FormField
           control={form.control}
@@ -103,45 +118,49 @@ export function RSVPForm({ onSuccess }: RSVPFormProps) {
               <FormLabel className="text-base font-medium text-baby-blue-dark">
                 Status Kehadiran *
               </FormLabel>
-              <div className="space-y-3 mt-2">
-                {/* Hadir Radio */}
-                <div className="flex items-center space-x-3">
-                  <input
-                    type="radio"
-                    id="hadir"
-                    value="hadir"
-                    checked={field.value === "hadir"}
-                    onChange={() => handleStatusChange("hadir")}
-                    disabled={isPending}
-                    className="h-4 w-4 border-baby-blue text-baby-blue focus:ring-baby-blue focus:ring-2 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
-                  />
-                  <label
-                    htmlFor="hadir"
-                    className="text-sm font-medium leading-none cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  >
-                    Hadir
-                  </label>
-                </div>
+              <FormControl>
+                <div className="space-y-3 mt-2">
+                  {/* Hadir Radio */}
+                  <div className="flex items-center space-x-3">
+                    <input
+                      type="radio"
+                      id="hadir"
+                      value="hadir"
+                      checked={field.value === "hadir"}
+                      onChange={() => handleStatusChange("hadir", field.onChange)}
+                      onBlur={field.onBlur}
+                      disabled={isPending}
+                      className="h-4 w-4 border-baby-blue text-baby-blue focus:ring-baby-blue focus:ring-2 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+                    />
+                    <label
+                      htmlFor="hadir"
+                      className="text-sm font-medium leading-none cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      Hadir
+                    </label>
+                  </div>
 
-                {/* Tidak Hadir Radio */}
-                <div className="flex items-center space-x-3">
-                  <input
-                    type="radio"
-                    id="tidak_hadir"
-                    value="tidak_hadir"
-                    checked={field.value === "tidak_hadir"}
-                    onChange={() => handleStatusChange("tidak_hadir")}
-                    disabled={isPending}
-                    className="h-4 w-4 border-baby-blue text-baby-blue focus:ring-baby-blue focus:ring-2 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
-                  />
-                  <label
-                    htmlFor="tidak_hadir"
-                    className="text-sm font-medium leading-none cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  >
-                    Tidak Hadir
-                  </label>
+                  {/* Tidak Hadir Radio */}
+                  <div className="flex items-center space-x-3">
+                    <input
+                      type="radio"
+                      id="tidak_hadir"
+                      value="tidak_hadir"
+                      checked={field.value === "tidak_hadir"}
+                      onChange={() => handleStatusChange("tidak_hadir", field.onChange)}
+                      onBlur={field.onBlur}
+                      disabled={isPending}
+                      className="h-4 w-4 border-baby-blue text-baby-blue focus:ring-baby-blue focus:ring-2 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+                    />
+                    <label
+                      htmlFor="tidak_hadir"
+                      className="text-sm font-medium leading-none cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      Tidak Hadir
+                    </label>
+                  </div>
                 </div>
-              </div>
+              </FormControl>
               <FormMessage className="text-error" />
             </FormItem>
           )}
