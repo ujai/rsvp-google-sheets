@@ -125,10 +125,15 @@ export function RSVPForm({ onSuccess }: RSVPFormProps) {
                     <input
                       type="radio"
                       id="hadir"
+                      name={field.name}
                       value="hadir"
                       checked={field.value === "hadir"}
-                      onChange={() => handleStatusChange("hadir", field.onChange)}
+                      onChange={(e) => {
+                        console.log("[RSVPForm] Radio changed to:", e.target.value);
+                        handleStatusChange("hadir", field.onChange);
+                      }}
                       onBlur={field.onBlur}
+                      ref={field.ref}
                       disabled={isPending}
                       className="h-4 w-4 border-baby-blue text-baby-blue focus:ring-baby-blue focus:ring-2 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
                     />
@@ -145,10 +150,15 @@ export function RSVPForm({ onSuccess }: RSVPFormProps) {
                     <input
                       type="radio"
                       id="tidak_hadir"
+                      name={field.name}
                       value="tidak_hadir"
                       checked={field.value === "tidak_hadir"}
-                      onChange={() => handleStatusChange("tidak_hadir", field.onChange)}
+                      onChange={(e) => {
+                        console.log("[RSVPForm] Radio changed to:", e.target.value);
+                        handleStatusChange("tidak_hadir", field.onChange);
+                      }}
                       onBlur={field.onBlur}
+                      ref={field.ref}
                       disabled={isPending}
                       className="h-4 w-4 border-baby-blue text-baby-blue focus:ring-baby-blue focus:ring-2 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
                     />
