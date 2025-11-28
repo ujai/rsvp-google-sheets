@@ -8,14 +8,8 @@ import { EVENT_DETAILS } from "@/lib/constants";
  * - Full circular teddy bear image with baby blue letterboxing
  * - Gold decorative border
  * - Event details in a cream card below (can be hidden)
- *
- * @param hideText - Whether to hide the title and baby name text
  */
-interface HeroSectionProps {
-  hideText?: boolean;
-}
-
-export function HeroSection({ hideText = false }: HeroSectionProps) {
+export function HeroSection() {
   return (
     <section className="relative w-full">
       {/* Hero Image Container */}
