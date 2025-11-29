@@ -20,6 +20,11 @@ The spec folder serves as a central repository for:
    - Priority: High
    - Blocks development when Google Sheets credentials are not configured
 
+2. **features/2025-11-28-ui-improvement-baby-boy-theme.md** - UI Enhancement for Baby Boy Aqiqah Theme
+   - Status: Initialized - Awaiting Review
+   - Priority: Medium
+   - Improve UI/UX while preserving baby blue theme colors and Vercel compatibility
+
 ## Specification Template
 
 Each specification should include:

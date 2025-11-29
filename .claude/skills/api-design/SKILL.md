@@ -1,32 +1,35 @@
 ---
 name: api-design
-description: Design clean, scalable, and maintainable REST and GraphQL APIs following industry best practices. Use when designing public or internal APIs, planning endpoint structures, defining request/response contracts, establishing versioning strategies, implementing authentication patterns, designing data models, creating API documentation, ensuring consistent error handling, optimizing for performance, or establishing service contracts between microservices.
+description: Design clean, scalable, and maintainable REST and GraphQL APIs following industry best practices. Use when designing new public or internal APIs from scratch, planning RESTful endpoint structures and URL patterns, defining request/response contracts and data schemas, establishing API versioning and deprecation strategies (v1, v2), implementing authentication and authorization patterns (JWT, OAuth, API keys), designing data models for API responses, creating comprehensive API documentation (OpenAPI/Swagger, GraphQL schema), ensuring consistent error handling and HTTP status codes, planning pagination strategies (cursor-based, offset-based), implementing filtering and sorting capabilities, establishing rate limiting and throttling policies, designing webhooks and event-driven integrations, creating service contracts between microservices, optimizing API performance with caching strategies (ETag, Cache-Control), implementing idempotency for safe retries, designing GraphQL schemas with resolvers and DataLoader, handling file uploads in APIs, implementing real-time APIs with WebSockets or Server-Sent Events, designing backwards-compatible API changes, creating API client SDKs, or writing API route handlers (.ts, .js files in api/, routes/, controllers/ directories).
 ---
 
 # API Design - Building Clean, Scalable REST & GraphQL APIs
 
 ## When to use this skill
 
-- Designing new REST or GraphQL APIs from scratch
-- Planning endpoint structures and URL patterns
-- Defining request/response contracts and data schemas
-- Establishing API versioning and deprecation strategies
-- Implementing authentication and authorization patterns
-- Creating API documentation (OpenAPI/Swagger)
-- Designing error response formats and status codes
-- Planning pagination, filtering, and sorting strategies
-- Establishing rate limiting and throttling policies
-- Designing webhooks or event-driven integrations
-- Creating service contracts for microservices
-- Optimizing API performance and caching strategies
-
-## When to use this skill
-
-- Designing public or internal APIs, planning endpoints, defining contracts between services.
-- When working on related tasks or features
-- During development that requires this expertise
-
-**Use when**: Designing public or internal APIs, planning endpoints, defining contracts between services.
+- Designing new REST or GraphQL APIs from scratch for web applications
+- Planning endpoint structures and resource-based URL patterns (/users, /posts/:id)
+- Defining request/response contracts, data schemas, and payload structures
+- Establishing API versioning strategies (URL versioning, header versioning) and deprecation plans
+- Implementing authentication patterns (JWT Bearer tokens, OAuth 2.0, API keys)
+- Designing authorization and permission models for API endpoints
+- Creating comprehensive API documentation using OpenAPI/Swagger or GraphQL introspection
+- Designing consistent error response formats with proper HTTP status codes (400, 401, 404, 500)
+- Planning pagination strategies for list endpoints (cursor-based, offset-based, page-based)
+- Implementing filtering, sorting, and field selection query parameters
+- Establishing rate limiting, throttling policies, and quota management
+- Designing webhooks and event-driven integrations for async communication
+- Creating service-to-service contracts in microservices architectures
+- Optimizing API performance with HTTP caching (ETag, Last-Modified, Cache-Control headers)
+- Implementing idempotency for POST requests with idempotency keys
+- Designing GraphQL schemas with types, queries, mutations, and subscriptions
+- Writing efficient GraphQL resolvers with DataLoader to prevent N+1 queries
+- Handling multipart file uploads and streaming in REST APIs
+- Implementing real-time APIs using WebSockets or Server-Sent Events
+- Designing backwards-compatible API changes and migration strategies
+- Writing API route handlers in Express, Fastify, Next.js API routes, or similar frameworks
+- Creating files in api/, routes/, controllers/, or graphql/ directories
+- Working with API testing tools like Postman, Insomnia, or curl
 
 ## Core Principles
 

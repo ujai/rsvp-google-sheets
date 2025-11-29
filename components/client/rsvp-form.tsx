@@ -1,7 +1,7 @@
 "use client";
 
 import { useTransition } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { rsvpSchema, type RSVPFormData } from "@/lib/validations";
 import { submitRSVP } from "@/app/actions/rsvp";
@@ -33,7 +33,14 @@ export function RSVPForm({ onSuccess }: RSVPFormProps) {
     },
   });
 
-  const watchedStatus = form.watch("statusKehadiran");
+  // Use useWatch hook for better performance and reactivity
+  const watchedStatus = useWatch({
+    control: form.control,
+    name: "statusKehadiran",
+  });
+
+  // Debug log to see what value we're getting
+  console.log("[RSVPForm] Watched status value:", watchedStatus);
 
   const onSubmit = (data: RSVPFormData) => {
     startTransition(async () => {
