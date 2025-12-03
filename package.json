@@ -43,7 +43,12 @@
     "zod": "^4.1.13"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^16.0.6",
+    "@playwright/test": "^1.57.0",
     "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/bcryptjs": "^2.4.6",
     "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^20",
@@ -53,6 +58,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
     "eslint-plugin-security": "^3.0.1",
+    "jsdom": "^27.2.0",
     "tailwindcss": "^4",
     "tsx": "^4.20.6",
     "typescript": "^5",
