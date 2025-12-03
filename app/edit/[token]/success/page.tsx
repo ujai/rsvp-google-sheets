@@ -3,12 +3,12 @@ import { EVENT_DETAILS } from "@/lib/constants";
 import { CheckCircle2 } from "lucide-react";
 
 interface EditSuccessPageProps {
-  params: {
+  params: Promise<{
     token: string;
-  };
+  }>;
 }
 
-export default function EditSuccessPage({ params: _params }: EditSuccessPageProps) {
+export default async function EditSuccessPage({ params: _params }: EditSuccessPageProps) {
   return (
     <div className="min-h-screen bg-cream py-8 px-4">
       <div className="max-w-2xl mx-auto">

@@ -6,13 +6,13 @@ import { EVENT_DETAILS } from "@/lib/constants";
 import { isDeadlinePassed } from "@/lib/helpers";
 
 interface EditPageProps {
-  params: {
+  params: Promise<{
     token: string;
-  };
+  }>;
 }
 
 export default async function EditPage({ params }: EditPageProps) {
-  const { token } = params;
+  const { token } = await params;
 
   // Check if deadline has passed
   if (isDeadlinePassed()) {
