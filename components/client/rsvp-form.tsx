@@ -1,7 +1,7 @@
 "use client";
 
 import { useTransition } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { rsvpSchema, type RSVPFormData } from "@/lib/validations";
 import { submitRSVP } from "@/app/actions/rsvp";
@@ -15,6 +15,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { NumberInput } from "@/components/ui/number-input";
+import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 interface RSVPFormProps {
@@ -33,7 +36,14 @@ export function RSVPForm({ onSuccess }: RSVPFormProps) {
     },
   });
 
-  const watchedStatus = form.watch("statusKehadiran");
+  // Use useWatch hook for better performance and reactivity
+  const watchedStatus = useWatch({
+    control: form.control,
+    name: "statusKehadiran",
+  });
+
+  // Debug log to see what value we're getting
+  console.log("[RSVPForm] Watched status value:", watchedStatus);
 
   const onSubmit = (data: RSVPFormData) => {
     startTransition(async () => {
@@ -66,16 +76,6 @@ export function RSVPForm({ onSuccess }: RSVPFormProps) {
         toast.error("Ralat tidak dijangka berlaku. Sila cuba lagi.");
       }
     });
-  };
-
-  const handleStatusChange = (status: "hadir" | "tidak_hadir", onChange: (value: any) => void) => {
-    console.log("[RSVPForm] Status changed to:", status);
-    // Call field.onChange to properly update react-hook-form state
-    onChange(status);
-    // Clear bilanganOrang if "tidak_hadir" is selected
-    if (status === "tidak_hadir") {
-      form.setValue("bilanganOrang", undefined);
-    }
   };
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -119,57 +119,38 @@ export function RSVPForm({ onSuccess }: RSVPFormProps) {
                 Status Kehadiran *
               </FormLabel>
               <FormControl>
-                <div className="space-y-3 mt-2">
-                  {/* Hadir Radio */}
-                  <div className="flex items-center space-x-3">
-                    <input
-                      type="radio"
-                      id="hadir"
-                      name={field.name}
-                      value="hadir"
-                      checked={field.value === "hadir"}
-                      onChange={(e) => {
-                        console.log("[RSVPForm] Radio changed to:", e.target.value);
-                        handleStatusChange("hadir", field.onChange);
-                      }}
-                      onBlur={field.onBlur}
-                      ref={field.ref}
-                      disabled={isPending}
-                      className="h-4 w-4 border-baby-blue text-baby-blue focus:ring-baby-blue focus:ring-2 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
-                    />
+                <RadioGroup
+                  value={field.value}
+                  onValueChange={(value) => {
+                    console.log("[RSVPForm] Radio changed to:", value);
+                    field.onChange(value);
+                    if (value === "tidak_hadir") {
+                      form.setValue("bilanganOrang", undefined);
+                    }
+                  }}
+                  disabled={isPending}
+                  className="space-y-3 mt-2"
+                >
+                  <div className="flex items-center space-x-3 p-4 min-h-[44px] border border-baby-blue-light rounded-lg hover:bg-baby-blue/5 transition-colors cursor-pointer">
+                    <RadioGroupItem value="hadir" id="hadir" />
                     <label
                       htmlFor="hadir"
-                      className="text-sm font-medium leading-none cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      className="text-sm font-medium cursor-pointer flex-1"
                     >
                       Hadir
                     </label>
                   </div>
 
-                  {/* Tidak Hadir Radio */}
-                  <div className="flex items-center space-x-3">
-                    <input
-                      type="radio"
-                      id="tidak_hadir"
-                      name={field.name}
-                      value="tidak_hadir"
-                      checked={field.value === "tidak_hadir"}
-                      onChange={(e) => {
-                        console.log("[RSVPForm] Radio changed to:", e.target.value);
-                        handleStatusChange("tidak_hadir", field.onChange);
-                      }}
-                      onBlur={field.onBlur}
-                      ref={field.ref}
-                      disabled={isPending}
-                      className="h-4 w-4 border-baby-blue text-baby-blue focus:ring-baby-blue focus:ring-2 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
-                    />
+                  <div className="flex items-center space-x-3 p-4 min-h-[44px] border border-baby-blue-light rounded-lg hover:bg-baby-blue/5 transition-colors cursor-pointer">
+                    <RadioGroupItem value="tidak_hadir" id="tidak_hadir" />
                     <label
                       htmlFor="tidak_hadir"
-                      className="text-sm font-medium leading-none cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      className="text-sm font-medium cursor-pointer flex-1"
                     >
                       Tidak Hadir
                     </label>
                   </div>
-                </div>
+                </RadioGroup>
               </FormControl>
               <FormMessage className="text-error" />
             </FormItem>
@@ -187,18 +168,13 @@ export function RSVPForm({ onSuccess }: RSVPFormProps) {
                   Bilangan Orang (termasuk anda) *
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    {...field}
-                    type="number"
-                    min="1"
-                    placeholder="Contoh: 4"
+                  <NumberInput
+                    value={field.value}
+                    onChange={field.onChange}
+                    min={1}
+                    max={20}
                     disabled={isPending}
-                    value={field.value || ""}
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      field.onChange(value === "" ? undefined : parseInt(value, 10));
-                    }}
-                    className="border-baby-blue-light focus:border-baby-blue focus:ring-baby-blue"
+                    className="justify-center"
                   />
                 </FormControl>
                 <p className="text-xs text-baby-blue-dark mt-1">
@@ -214,9 +190,16 @@ export function RSVPForm({ onSuccess }: RSVPFormProps) {
         <Button
           type="submit"
           disabled={isPending}
-          className="w-full bg-baby-blue hover:bg-baby-blue-dark text-white font-medium py-6 rounded-lg transition-colors"
+          className="w-full bg-baby-blue hover:bg-baby-blue-dark text-white font-medium py-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isPending ? "Menghantar..." : "Hantar RSVP"}
+          {isPending ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Menghantar...
+            </>
+          ) : (
+            "Hantar RSVP"
+          )}
         </Button>
 
         {/* Required Fields Note */}

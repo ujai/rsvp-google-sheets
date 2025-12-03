@@ -1,14 +1,22 @@
 import type { NextConfig } from "next";
 
+// Bundle analyzer (enabled with ANALYZE=true)
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 const isDev = process.env.NODE_ENV === 'development'
 
 // Content Security Policy
+// Updated to allow Google Maps embed
 const cspHeader = `
   default-src 'self';
   script-src 'self' ${isDev ? "'unsafe-eval' 'unsafe-inline'" : "'strict-dynamic'"};
   style-src 'self' 'unsafe-inline';
-  img-src 'self' blob: data:;
+  img-src 'self' blob: data: https://maps.googleapis.com https://maps.gstatic.com;
   font-src 'self';
+  frame-src https://www.google.com;
+  connect-src 'self' https://maps.googleapis.com;
   object-src 'none';
   base-uri 'self';
   form-action 'self';
@@ -27,7 +35,7 @@ const securityHeaders = [
   },
   {
     key: 'X-Frame-Options',
-    value: 'DENY'
+    value: 'SAMEORIGIN' // Changed from DENY to allow Google Maps embed
   },
   {
     key: 'X-Content-Type-Options',
@@ -49,6 +57,13 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+
+  // Optimize images
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+  },
 
   // Security headers
   async headers() {
@@ -79,7 +94,23 @@ const nextConfig: NextConfig = {
       ]
     }
     return []
-  }
+  },
+
+  // Production optimizations
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+
+  // Experimental optimizations for package imports
+  experimental: {
+    optimizePackageImports: [
+      'framer-motion',
+      'lucide-react',
+      '@radix-ui/react-radio-group',
+      '@radix-ui/react-progress',
+    ],
+  },
 };
 
-export default nextConfig;
+// Wrap with bundle analyzer
+export default withBundleAnalyzer(nextConfig);

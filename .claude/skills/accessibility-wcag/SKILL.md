@@ -1,32 +1,36 @@
 ---
 name: accessibility-wcag
-description: Build accessible web applications following WCAG 2.1/2.2 guidelines with proper semantic HTML, ARIA attributes, keyboard navigation, screen reader support, and inclusive design. Use when implementing ARIA labels and roles, ensuring keyboard navigation, supporting screen readers, providing text alternatives for images, managing focus, creating accessible forms, building inclusive UI components, testing with accessibility tools, meeting WCAG compliance levels, or designing for users with disabilities.
+description: Build accessible web applications following WCAG 2.1/2.2 guidelines with proper semantic HTML, ARIA attributes, keyboard navigation, screen reader support, and inclusive design. Use when implementing ARIA labels and roles, ensuring keyboard navigation support, supporting screen readers (NVDA, JAWS, VoiceOver), providing text alternatives for images and media, managing focus and focus indicators, creating accessible forms with proper labels and error messages, building inclusive UI components, testing with axe DevTools or Lighthouse, meeting WCAG AA or AAA compliance levels, designing for color blindness and low vision users, implementing skip links and landmarks, ensuring sufficient color contrast ratios (4.5:1 for text), making touch targets accessible (44x44px minimum), handling reduced motion preferences, creating accessible modals and dialogs, implementing accessible data tables, building accessible carousels and sliders, ensuring accessible file uploads, or designing for users with cognitive disabilities.
 ---
 
 # Accessibility (WCAG) - Building Inclusive Web Applications
 
 ## When to use this skill
 
-- Implementing ARIA labels, roles, and properties
-- Ensuring full keyboard navigation support
-- Supporting screen readers (NVDA, JAWS, VoiceOver)
-- Providing text alternatives for images and media
-- Managing focus and focus indicators
-- Creating accessible forms with proper labels
-- Building inclusive, usable UI components
-- Testing with axe DevTools or similar tools
-- Meeting WCAG 2.1/2.2 AA or AAA compliance
-- Designing for color blindness and low vision
-- Implementing skip links and landmarks
-- Ensuring sufficient color contrast ratios
-
-## When to use this skill
-
-- Designing UIs, implementing components, ensuring compliance with accessibility standards (WCAG 2.1/2.2).
-- When working on related tasks or features
-- During development that requires this expertise
-
-**Use when**: Designing UIs, implementing components, ensuring compliance with accessibility standards (WCAG 2.1/2.2).
+- Implementing ARIA labels, roles, and properties (aria-label, aria-describedby, role="dialog")
+- Ensuring full keyboard navigation support (Tab, Enter, Escape, Arrow keys)
+- Supporting screen readers (NVDA, JAWS, VoiceOver, TalkBack)
+- Providing text alternatives for images, videos, and non-text content
+- Managing focus and visible focus indicators throughout application
+- Creating accessible forms with proper labels, error messages, and validation feedback
+- Building inclusive, usable UI components (buttons, modals, dropdowns, tabs)
+- Testing with axe DevTools, Lighthouse, or WAVE accessibility checkers
+- Meeting WCAG 2.1/2.2 Level AA or AAA compliance requirements
+- Designing for color blindness, low vision, and visual impairments
+- Implementing skip links, landmarks, and semantic HTML structure
+- Ensuring sufficient color contrast ratios (4.5:1 minimum for normal text)
+- Making touch targets accessible (44x44px minimum for mobile)
+- Handling reduced motion preferences (prefers-reduced-motion media query)
+- Creating accessible modals, dialogs, and overlay components
+- Implementing accessible data tables with proper headers and scope
+- Building accessible carousels, sliders, and interactive widgets
+- Ensuring accessible file uploads and drag-and-drop interfaces
+- Designing for users with cognitive disabilities and neurodivergent users
+- Writing HTML files (.html, .jsx, .tsx, .vue, .svelte)
+- Editing React components that render UI elements
+- Creating forms, buttons, navigation menus, or interactive components
+- Working on public-facing websites or web applications
+- Developing components for component libraries or design systems
 
 ## Core Principles (POUR)
 

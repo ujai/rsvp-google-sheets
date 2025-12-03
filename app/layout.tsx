@@ -26,6 +26,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ms">
+      <head>
+        {/* Resource hints for Google Maps - improves loading performance */}
+        <link rel="dns-prefetch" href="https://maps.googleapis.com" />
+        <link rel="preconnect" href="https://maps.googleapis.com" />
+        <link rel="preconnect" href="https://maps.gstatic.com" crossOrigin="" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

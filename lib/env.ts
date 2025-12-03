@@ -57,6 +57,11 @@ const envSchema = z.object({
     .url('NEXT_PUBLIC_APP_URL must be a valid URL')
     .default('http://localhost:3000'),
 
+  // Google Maps Embed API Key (public - restricted to domain)
+  NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: z
+    .string()
+    .min(1, 'NEXT_PUBLIC_GOOGLE_MAPS_API_KEY is required for Google Maps embed'),
+
   RSVP_DEADLINE: z
     .string()
     .refine(

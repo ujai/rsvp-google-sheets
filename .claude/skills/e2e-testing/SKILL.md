@@ -1,32 +1,33 @@
 ---
 name: e2e-testing
-description: Write comprehensive end-to-end tests that verify complete user workflows, integration between components, and system behavior from user perspective using Playwright, Cypress, or similar frameworks. Use when testing user flows, verifying feature integration, testing across real browsers, ensuring UI interactions work correctly, validating form submissions end-to-end, testing authentication flows, catching regressions, automating QA processes, testing API integrations, or building confidence in production deployments.
+description: Write comprehensive end-to-end tests that verify complete user workflows, integration between components, and system behavior from user perspective using Playwright or Cypress frameworks. Use when testing complete user flows and journeys (signup, login, checkout, form submission), verifying integration between frontend and backend systems, testing across real browsers (Chrome, Firefox, Safari, Edge), ensuring UI interactions work correctly (clicks, typing, navigation), validating form submissions and data persistence end-to-end, testing authentication and authorization flows with cookies and sessions, catching regressions before production deployments with CI/CD integration, automating manual QA testing processes to save time, testing responsive behavior across different viewport sizes and devices, verifying third-party integrations (payment gateways, OAuth providers) work correctly, building confidence in production deployments with smoke tests, testing error handling and edge cases comprehensively, ensuring accessibility features work with screen readers and keyboard navigation, writing test files in e2e/, tests/, or __tests__/ directories with .spec.ts or .test.ts extensions, using Playwright Test or Cypress for test automation, or implementing visual regression testing with screenshot comparisons.
 ---
 
 # End-to-End Testing - Testing Full User Workflows
 
 ## When to use this skill
 
-- Testing complete user workflows end-to-end
-- Verifying integration between frontend and backend
-- Testing critical user journeys (signup, checkout, etc.)
-- Validating form submissions and data persistence
-- Testing authentication and authorization flows
-- Catching regressions before production deployment
-- Automating manual QA testing processes
-- Testing responsive behavior across devices
-- Verifying third-party integrations work correctly
-- Building CI/CD confidence with automated tests
-- Testing error handling and edge cases
-- Ensuring accessibility features work correctly
-
-## When to use this skill
-
-- Verifying complete user flows, testing integrations, validating critical paths, or ensuring features work in production-like environments.
-- When working on related tasks or features
-- During development that requires this expertise
-
-**Use when**: Verifying complete user flows, testing integrations, validating critical paths, or ensuring features work in production-like environments.
+- Testing complete user workflows end-to-end from start to finish (full user journeys)
+- Verifying integration between frontend React components and backend API/database
+- Testing critical user journeys like signup, login, checkout, payment flows
+- Validating form submissions persist data correctly to database
+- Testing authentication and authorization flows with sessions, cookies, JWT tokens
+- Catching regressions before production deployment by running tests in CI/CD pipelines
+- Automating repetitive manual QA testing processes to improve efficiency
+- Testing responsive behavior across different viewport sizes (mobile, tablet, desktop)
+- Verifying third-party integrations like Stripe payments, Google OAuth, analytics work
+- Building confidence in production deployments with comprehensive test coverage
+- Testing error handling scenarios (network failures, validation errors, edge cases)
+- Ensuring accessibility features work correctly with keyboard navigation and screen readers
+- Writing test files with Playwright Test using .spec.ts or .test.ts file extensions
+- Using Cypress for interactive test development with time-travel debugging
+- Implementing visual regression testing with screenshot comparisons (toHaveScreenshot)
+- Testing across multiple real browsers (Chromium, Firefox, WebKit/Safari)
+- Using Page Object Model pattern to organize test code and reduce duplication
+- Creating test fixtures for setup/teardown and authentication state
+- Mocking API responses for consistent test environments
+- Writing tests in e2e/, tests/, cypress/, or playwright/ directories
+- Running tests in CI/CD with GitHub Actions, GitLab CI, or similar platforms
 
 ## Core Principles
 

@@ -1,10 +1,28 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { RSVPForm } from "@/components/client/rsvp-form";
-import { Confirmation } from "@/components/client/confirmation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ERROR_MESSAGES } from "@/lib/constants";
+
+// Dynamic import for Confirmation to reduce initial bundle
+// Confetti doesn't need SSR, so we disable it
+const Confirmation = dynamic(
+  () => import("@/components/client/confirmation").then((mod) => ({ default: mod.Confirmation })),
+  {
+    loading: () => (
+      <div className="flex items-center justify-center py-12">
+        <div className="animate-pulse space-y-4 w-full max-w-md mx-auto">
+          <div className="h-20 bg-baby-blue-light rounded-full w-20 mx-auto"></div>
+          <div className="h-8 bg-baby-blue-light rounded w-3/4 mx-auto"></div>
+          <div className="h-4 bg-baby-blue-light rounded w-1/2 mx-auto"></div>
+        </div>
+      </div>
+    ),
+    ssr: false, // Confetti doesn't need SSR
+  }
+);
 
 /**
  * RSVP Section Component (Client Component)
