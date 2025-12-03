@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { HeroSection } from "@/components/client/hero-section";
 import { RSVPSection } from "@/components/client/rsvp-section";
 import { RSVPUnavailableMessage } from "@/components/server/rsvp-unavailable-message";
@@ -16,10 +17,16 @@ interface HomeClientProps {
 }
 
 export function HomeClient({ deadlinePassed, isAPIHealthy, children }: HomeClientProps) {
+  const [showingConfirmation, setShowingConfirmation] = useState(false);
+
+  const handleConfirmationChange = (showing: boolean) => {
+    setShowingConfirmation(showing);
+  };
+
   return (
     <>
       {/* Hero Section */}
-      <HeroSection />
+      <HeroSection hideCountdown={showingConfirmation} />
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8 max-w-4xl">
@@ -27,12 +34,15 @@ export function HomeClient({ deadlinePassed, isAPIHealthy, children }: HomeClien
           {/* Event Details */}
           {children}
 
-          {/* Deadline Countdown - Hide when deadline passed */}
-          {!deadlinePassed && <DeadlineCountdown />}
+          {/* Deadline Countdown - Hide when deadline passed or after RSVP submission */}
+          {!deadlinePassed && !showingConfirmation && <DeadlineCountdown />}
 
           {/* RSVP Form Section - Conditional rendering based on API health */}
           {isAPIHealthy ? (
-            <RSVPSection deadlinePassed={deadlinePassed} />
+            <RSVPSection
+              deadlinePassed={deadlinePassed}
+              onConfirmationChange={handleConfirmationChange}
+            />
           ) : (
             <RSVPUnavailableMessage />
           )}

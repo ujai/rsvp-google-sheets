@@ -9,10 +9,14 @@ import { CountdownTimer } from "@/components/client/countdown-timer";
  * Structure:
  * - Full circular teddy bear image with baby blue letterboxing
  * - Gold decorative border
- * - Countdown timer section
+ * - Countdown timer section (hidden after RSVP submission)
  * - Event details in a cream card below (can be hidden)
  */
-export function HeroSection() {
+interface HeroSectionProps {
+  hideCountdown?: boolean;
+}
+
+export function HeroSection({ hideCountdown = false }: HeroSectionProps) {
   return (
     <section className="relative w-full">
       {/* Hero Image Container */}
@@ -31,10 +35,12 @@ export function HeroSection() {
       {/* Islamic Decorative Border */}
       <div className="w-full h-2 bg-gradient-to-r from-transparent via-gold to-transparent" />
 
-      {/* RSVP Deadline Countdown */}
-      <div className="container mx-auto px-4 py-8">
-        <CountdownTimer targetDate={process.env.NEXT_PUBLIC_RSVP_DEADLINE || "2026-01-17T23:59:59+08:00"} />
-      </div>
+      {/* RSVP Deadline Countdown - Hide after RSVP submission */}
+      {!hideCountdown && (
+        <div className="container mx-auto px-4 py-8">
+          <CountdownTimer targetDate={process.env.NEXT_PUBLIC_RSVP_DEADLINE || "2026-01-17T23:59:59+08:00"} />
+        </div>
+      )}
 
       {/* Text Content Card - Hidden to avoid duplication with image */}
     </section>
