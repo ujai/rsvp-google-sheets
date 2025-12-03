@@ -4,7 +4,6 @@ import { useState } from "react";
 import { HeroSection } from "@/components/client/hero-section";
 import { RSVPSection } from "@/components/client/rsvp-section";
 import { RSVPUnavailableMessage } from "@/components/server/rsvp-unavailable-message";
-import { DeadlineCountdown } from "@/components/client/deadline-countdown";
 
 /**
  * Home Client Component
@@ -33,9 +32,6 @@ export function HomeClient({ deadlinePassed, isAPIHealthy, children }: HomeClien
         <div className="space-y-6">
           {/* Event Details */}
           {children}
-
-          {/* Deadline Countdown - Hide when deadline passed or after RSVP submission */}
-          {!deadlinePassed && !showingConfirmation && <DeadlineCountdown />}
 
           {/* RSVP Form Section - Conditional rendering based on API health */}
           {isAPIHealthy ? (

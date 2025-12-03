@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { RSVPForm } from "@/components/client/rsvp-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ERROR_MESSAGES } from "@/lib/constants";
+import { DeadlineCountdown } from "@/components/client/deadline-countdown";
 
 // Dynamic import for Confirmation to reduce initial bundle
 // Confetti doesn't need SSR, so we disable it
@@ -96,6 +97,9 @@ export function RSVPSection({ deadlinePassed, onConfirmationChange }: RSVPSectio
         </p>
       </CardHeader>
       <CardContent className="p-6">
+        <div className="mb-6">
+          <DeadlineCountdown />
+        </div>
         <RSVPForm onSuccess={handleRSVPSuccess} />
       </CardContent>
     </Card>
