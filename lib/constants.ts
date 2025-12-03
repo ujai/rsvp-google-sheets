@@ -44,14 +44,39 @@ export const getRsvpDeadline = () => {
 
 /**
  * App URL
- * Uses NEXT_PUBLIC prefix as it's exposed to browser
- * Configured via validated environment variable with default fallback
+ * Automatically detects correct URL based on environment:
+ * - Development: http://localhost:3000
+ * - Vercel Preview: https://{VERCEL_URL}
+ * - Vercel Production: https://{VERCEL_PROJECT_PRODUCTION_URL}
+ * - Custom: Uses NEXT_PUBLIC_APP_URL if explicitly set
+ *
  * Lazy-loaded to avoid accessing env during module evaluation
  */
 let _appUrl: string | null = null;
 export const getAppUrl = () => {
   if (!_appUrl) {
-    _appUrl = env.NEXT_PUBLIC_APP_URL;
+    // Check if we're in Vercel environment (server-side variables)
+    const vercelEnv = process.env.VERCEL_ENV || process.env.NEXT_PUBLIC_VERCEL_ENV;
+    const vercelUrl = process.env.VERCEL_URL || process.env.NEXT_PUBLIC_VERCEL_URL;
+    const vercelProductionUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL;
+
+    // Priority: Custom URL > Vercel Production > Vercel Preview > Default
+    if (env.NEXT_PUBLIC_APP_URL && env.NEXT_PUBLIC_APP_URL !== 'http://localhost:3000') {
+      // Use custom URL if explicitly set and not the default
+      _appUrl = env.NEXT_PUBLIC_APP_URL;
+    } else if (vercelEnv === 'production' && vercelProductionUrl) {
+      // Use production URL in production
+      _appUrl = `https://${vercelProductionUrl}`;
+    } else if (vercelEnv === 'preview' && vercelUrl) {
+      // Use preview URL in preview deployments
+      _appUrl = `https://${vercelUrl}`;
+    } else if (vercelUrl) {
+      // Fallback to VERCEL_URL if available
+      _appUrl = `https://${vercelUrl}`;
+    } else {
+      // Fallback to localhost for development
+      _appUrl = env.NEXT_PUBLIC_APP_URL;
+    }
   }
   return _appUrl;
 };
