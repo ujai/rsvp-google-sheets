@@ -31,7 +31,7 @@ export function RSVPForm({ onSuccess }: RSVPFormProps) {
     resolver: zodResolver(rsvpSchema),
     defaultValues: {
       nama: "",
-      statusKehadiran: undefined,
+      statusKehadiran: "",
       bilanganOrang: undefined,
     },
   });

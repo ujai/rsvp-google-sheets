@@ -13,6 +13,7 @@ const cspHeader = `
   style-src 'self' 'unsafe-inline';
   img-src 'self' blob: data: https://maps.googleapis.com https://maps.gstatic.com;
   font-src 'self';
+  worker-src 'self' blob:;
   frame-src https://www.google.com;
   connect-src 'self' https://maps.googleapis.com;
   object-src 'none';
