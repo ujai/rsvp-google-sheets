@@ -31,7 +31,7 @@ export function RSVPForm({ onSuccess }: RSVPFormProps) {
     resolver: zodResolver(rsvpSchema),
     defaultValues: {
       nama: "",
-      statusKehadiran: "",
+      statusKehadiran: undefined,
       bilanganOrang: undefined,
     },
   });
@@ -120,7 +120,7 @@ export function RSVPForm({ onSuccess }: RSVPFormProps) {
               </FormLabel>
               <FormControl>
                 <RadioGroup
-                  value={field.value}
+                  value={field.value ?? ""}
                   onValueChange={(value) => {
                     console.log("[RSVPForm] Radio changed to:", value);
                     field.onChange(value);
