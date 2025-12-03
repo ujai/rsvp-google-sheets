@@ -59,7 +59,7 @@ export function NumberInput({
         min={min}
         max={max}
         disabled={disabled}
-        className="text-center h-11 w-20 border-baby-blue-light focus:border-baby-blue"
+        className="text-center h-11 w-20 border-baby-blue-light focus:border-baby-blue [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield]"
         aria-label="Bilangan orang"
       />
 
