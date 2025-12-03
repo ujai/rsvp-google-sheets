@@ -13,8 +13,14 @@ export const EVENT_DETAILS: EventDetails = {
   time: "10.30 am - 2.30 pm",
   venue: "Ruang Acara Nadi Rafanda",
   address: "No. 1 Jalan Meteor P U16/P, Elmina East, 40160 Shah Alam, Selangor",
+  coordinates: {
+    lat: 3.1636814,
+    lng: 101.527262,
+  },
   mapUrl:
     "https://www.google.com/maps/place/Ruang+Acara+Nadi+Rafanda/@3.1636868,101.5246871,17z/data=!3m1!4b1!4m6!3m5!1s0x31cc4f007d9ebd47:0xeb6f2a0648d0ebf5!8m2!3d3.1636814!4d101.527262!16s%2Fg%2F11wx6twjkq?entry=ttu&g_ep=EgoyMDI1MTExNy4wIKXMDSoASAFQAw%3D%3D",
+  wazeUrl:
+    "https://www.waze.com/en/live-map/directions/my/selangor/shah-alam/ruang-acara-nadi-rafanda?navigate=yes&place=ChIJR72efQBPzDER9evQSAYqb-s",
 };
 
 /**

@@ -71,7 +71,7 @@ export function EventDetails() {
                     height="100%"
                     style={{ border: 0 }}
                     referrerPolicy="no-referrer-when-downgrade"
-                    src={`https://www.google.com/maps/embed/v1/place?key=${env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=place_id:ChIJR73efQBPzDERJUvQSAYq9us&zoom=15`}
+                    src={`https://www.google.com/maps/embed/v1/place?key=${env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=${encodeURIComponent(EVENT_DETAILS.venue + ', ' + EVENT_DETAILS.address)}&center=${EVENT_DETAILS.coordinates.lat},${EVENT_DETAILS.coordinates.lng}&zoom=16`}
                     allowFullScreen
                     loading="lazy"
                     title="Peta menunjukkan lokasi majlis di Ruang Acara Nadi Rafanda"
@@ -92,7 +92,7 @@ export function EventDetails() {
                   Google Maps
                 </a>
                 <a
-                  href={`https://waze.com/ul?ll=${EVENT_DETAILS.mapUrl.match(/ll=([^&]+)/)?.[1]}&navigate=yes`}
+                  href={EVENT_DETAILS.wazeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 bg-baby-blue hover:bg-baby-blue-dark text-white text-center py-3 rounded-lg font-medium transition-colors"

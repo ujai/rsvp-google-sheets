@@ -36,5 +36,10 @@ export interface EventDetails {
   time: string;
   venue: string;
   address: string;
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
   mapUrl: string;
+  wazeUrl: string;
 }

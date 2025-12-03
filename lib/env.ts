@@ -70,7 +70,7 @@ const envSchema = z.object({
       (val) => !isNaN(Date.parse(val)),
       'RSVP_DEADLINE must be a valid datetime string'
     )
-    .default('2026-01-10T23:59:59+08:00'),
+    .default('2026-01-17T23:59:59+08:00'),
 
   // Client-side RSVP deadline (for countdown timer in browser)
   NEXT_PUBLIC_RSVP_DEADLINE: z
@@ -79,7 +79,7 @@ const envSchema = z.object({
       (val) => !isNaN(Date.parse(val)),
       'NEXT_PUBLIC_RSVP_DEADLINE must be a valid datetime string'
     )
-    .default('2026-01-10T23:59:59+08:00'),
+    .default('2026-01-17T23:59:59+08:00'),
 
   EDIT_TOKEN_SECRET: z
     .string()

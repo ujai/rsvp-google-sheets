@@ -33,15 +33,7 @@ export function HeroSection() {
 
       {/* RSVP Deadline Countdown */}
       <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-6">
-          <h2 className="text-2xl md:text-3xl font-semibold text-baby-blue-dark mb-2">
-            Tarikh Akhir Pengesahan
-          </h2>
-          <p className="text-sm md:text-base text-muted">
-            10 JANUARI 2026
-          </p>
-        </div>
-        <CountdownTimer targetDate={process.env.NEXT_PUBLIC_RSVP_DEADLINE || "2026-01-10T23:59:59+08:00"} />
+        <CountdownTimer targetDate={process.env.NEXT_PUBLIC_RSVP_DEADLINE || "2026-01-17T23:59:59+08:00"} />
       </div>
 
       {/* Text Content Card - Hidden to avoid duplication with image */}
