@@ -5,13 +5,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const isDev = process.env.NODE_ENV === 'development'
-
 // Content Security Policy
 // Updated to allow Google Maps embed
 const cspHeader = `
   default-src 'self';
-  script-src 'self' ${isDev ? "'unsafe-eval' 'unsafe-inline'" : "'strict-dynamic'"};
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' https:;
   style-src 'self' 'unsafe-inline';
   img-src 'self' blob: data: https://maps.googleapis.com https://maps.gstatic.com;
   font-src 'self';
