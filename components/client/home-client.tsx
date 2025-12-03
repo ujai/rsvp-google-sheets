@@ -1,6 +1,6 @@
 "use client";
 
-import { HeroSection } from "@/components/server/hero-section";
+import { HeroSection } from "@/components/client/hero-section";
 import { RSVPSection } from "@/components/client/rsvp-section";
 import { RSVPUnavailableMessage } from "@/components/server/rsvp-unavailable-message";
 import { DeadlineCountdown } from "@/components/client/deadline-countdown";

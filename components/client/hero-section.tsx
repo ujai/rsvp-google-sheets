@@ -1,5 +1,6 @@
+"use client";
+
 import Image from "next/image";
-import { EVENT_DETAILS } from "@/lib/constants";
 import { CountdownTimer } from "@/components/client/countdown-timer";
 
 /**
@@ -18,7 +19,7 @@ export function HeroSection() {
       <div className="relative w-full bg-baby-blue-light flex items-center justify-center">
         <Image
           src="/images/RAHMAT_DON_ZULKARNAIN.png"
-          alt={`${EVENT_DETAILS.title} untuk ${EVENT_DETAILS.babyName}`}
+          alt="Majlis Aqiqah & Kesyukuran untuk Rahmat Don Zulkarnain"
           width={750}
           height={1050}
           priority
@@ -30,17 +31,17 @@ export function HeroSection() {
       {/* Islamic Decorative Border */}
       <div className="w-full h-2 bg-gradient-to-r from-transparent via-gold to-transparent" />
 
-      {/* Countdown Timer */}
+      {/* RSVP Deadline Countdown */}
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-6">
           <h2 className="text-2xl md:text-3xl font-semibold text-baby-blue-dark mb-2">
-            Hitung Hari Menuju Majlis
+            Tarikh Akhir Pengesahan
           </h2>
           <p className="text-sm md:text-base text-muted">
-            17 Januari 2026 | 10:30 AM
+            10 JANUARI 2026
           </p>
         </div>
-        <CountdownTimer targetDate="2026-01-17T10:30:00+08:00" />
+        <CountdownTimer targetDate={process.env.NEXT_PUBLIC_RSVP_DEADLINE || "2026-01-10T23:59:59+08:00"} />
       </div>
 
       {/* Text Content Card - Hidden to avoid duplication with image */}

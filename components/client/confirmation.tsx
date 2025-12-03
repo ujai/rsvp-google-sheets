@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle2, Copy, Check } from "lucide-react";
 import { toast } from "sonner";
 import { fadeInUp, scaleIn } from "@/lib/animations";
+import { CountdownTimer } from "@/components/client/countdown-timer";
+import { AddToCalendar } from "@/components/client/add-to-calendar";
 
 interface ConfirmationProps {
   editLink: string;
@@ -101,6 +103,25 @@ export function Confirmation({ editLink, onNewRSVP }: ConfirmationProps) {
               RSVP anda telah berjaya dihantar.
             </p>
           </motion.div>
+
+          {/* Event Countdown Section */}
+          <div className="space-y-4">
+            <div className="text-center">
+              <h3 className="text-xl md:text-2xl font-semibold text-baby-blue-dark mb-2">
+                Menanti Hari Majlis
+              </h3>
+              <p className="text-sm md:text-base text-muted mb-4">
+                17 Januari 2026 | 10:30 AM
+              </p>
+            </div>
+            <CountdownTimer targetDate="2026-01-17T10:30:00+08:00" />
+
+            {/* Add to Calendar Button */}
+            <div className="flex justify-center pt-4">
+              <AddToCalendar />
+            </div>
+          </div>
+
           {/* Edit Link Section */}
           <div className="bg-baby-blue/10 rounded-lg p-6 space-y-3">
             <h3 className="font-semibold text-baby-blue-dark text-lg">

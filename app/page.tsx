@@ -25,7 +25,15 @@ import { checkGoogleSheetsHealth } from "@/lib/google-sheets-health";
  * - Health check uses lightweight API call (metadata only)
  * - Health check has 5-second timeout
  * - Results cached for 2 minutes to reduce API calls
+ *
+ * Dynamic Rendering:
+ * - Forces dynamic rendering to avoid build-time health check failures
+ * - Ensures fresh health check results on each request
  */
+
+// Force dynamic rendering to avoid build-time API checks
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   // Check if RSVP deadline has passed
   const deadlinePassed = isDeadlinePassed();

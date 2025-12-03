@@ -1,7 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { EVENT_DETAILS } from "@/lib/constants";
 import { env } from "@/lib/env";
-import { AddToCalendar } from "@/components/client/add-to-calendar";
 import { Calendar, Clock, MapPin } from "lucide-react";
 
 export function EventDetails() {
@@ -60,29 +59,26 @@ export function EventDetails() {
               </div>
             </div>
 
-            {/* Add to Calendar Button */}
-            <div className="mb-8 flex justify-center">
-              <AddToCalendar />
-            </div>
-
             {/* Google Maps Embed */}
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold text-baby-blue-dark mb-3">
-                Lokasi di Peta
-              </h3>
-              <div className="w-full h-64 md:h-80 rounded-lg overflow-hidden border-2 border-baby-blue-light shadow-md">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  referrerPolicy="no-referrer-when-downgrade"
-                  src={`https://www.google.com/maps/embed/v1/place?key=${env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=place_id:ChIJR73efQBPzDERJUvQSAYq9us&zoom=15`}
-                  allowFullScreen
-                  loading="lazy"
-                  title="Peta menunjukkan lokasi majlis di Ruang Acara Nadi Rafanda"
-                />
+            {env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY && (
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-baby-blue-dark mb-3">
+                  Lokasi di Peta
+                </h3>
+                <div className="w-full h-64 md:h-80 rounded-lg overflow-hidden border-2 border-baby-blue-light shadow-md">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    referrerPolicy="no-referrer-when-downgrade"
+                    src={`https://www.google.com/maps/embed/v1/place?key=${env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=place_id:ChIJR73efQBPzDERJUvQSAYq9us&zoom=15`}
+                    allowFullScreen
+                    loading="lazy"
+                    title="Peta menunjukkan lokasi majlis di Ruang Acara Nadi Rafanda"
+                  />
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Map Links */}
             <div className="mt-6">

@@ -58,15 +58,26 @@ const envSchema = z.object({
     .default('http://localhost:3000'),
 
   // Google Maps Embed API Key (public - restricted to domain)
+  // Optional: Map embed will not be shown if not configured
   NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: z
     .string()
-    .min(1, 'NEXT_PUBLIC_GOOGLE_MAPS_API_KEY is required for Google Maps embed'),
+    .min(1, 'NEXT_PUBLIC_GOOGLE_MAPS_API_KEY must be a valid API key')
+    .optional(),
 
   RSVP_DEADLINE: z
     .string()
     .refine(
       (val) => !isNaN(Date.parse(val)),
       'RSVP_DEADLINE must be a valid datetime string'
+    )
+    .default('2026-01-10T23:59:59+08:00'),
+
+  // Client-side RSVP deadline (for countdown timer in browser)
+  NEXT_PUBLIC_RSVP_DEADLINE: z
+    .string()
+    .refine(
+      (val) => !isNaN(Date.parse(val)),
+      'NEXT_PUBLIC_RSVP_DEADLINE must be a valid datetime string'
     )
     .default('2026-01-10T23:59:59+08:00'),
 
