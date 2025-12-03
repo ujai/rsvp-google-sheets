@@ -24,6 +24,12 @@ export const EVENT_DETAILS: EventDetails = {
 };
 
 /**
+ * Event Date - ISO 8601 format for countdown
+ * 17 January 2026, 10:30 AM Malaysia Time (GMT+8)
+ */
+export const EVENT_DATE = "2026-01-17T10:30:00+08:00";
+
+/**
  * RSVP Deadline
  * Configured via validated environment variable with default fallback
  * Lazy-loaded to avoid accessing env during module evaluation

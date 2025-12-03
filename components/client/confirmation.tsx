@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { fadeInUp, scaleIn } from "@/lib/animations";
 import { CountdownTimer } from "@/components/client/countdown-timer";
 import { AddToCalendar } from "@/components/client/add-to-calendar";
+import { EVENT_DATE } from "@/lib/constants";
 
 interface ConfirmationProps {
   editLink: string;
@@ -114,7 +115,7 @@ export function Confirmation({ editLink, onNewRSVP }: ConfirmationProps) {
                 17 Januari 2026 | 10:30 AM
               </p>
             </div>
-            <CountdownTimer targetDate="2026-01-17T10:30:00+08:00" />
+            <CountdownTimer targetDate={EVENT_DATE} />
 
             {/* Add to Calendar Button */}
             <div className="flex justify-center pt-4">

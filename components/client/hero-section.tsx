@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { CountdownTimer } from "@/components/client/countdown-timer";
+import { EVENT_DATE } from "@/lib/constants";
 
 /**
  * HeroSection - Displays the event hero image and information card
@@ -35,10 +36,10 @@ export function HeroSection({ hideCountdown = false }: HeroSectionProps) {
       {/* Islamic Decorative Border */}
       <div className="w-full h-2 bg-gradient-to-r from-transparent via-gold to-transparent" />
 
-      {/* RSVP Deadline Countdown - Hide after RSVP submission */}
+      {/* Event Countdown - Hide after RSVP submission */}
       {!hideCountdown && (
         <div className="container mx-auto px-4 py-8">
-          <CountdownTimer targetDate={process.env.NEXT_PUBLIC_RSVP_DEADLINE || "2026-01-17T23:59:59+08:00"} />
+          <CountdownTimer targetDate={EVENT_DATE} />
         </div>
       )}
 
