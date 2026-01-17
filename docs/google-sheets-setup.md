@@ -237,7 +237,7 @@ Now configure your application with the Google Sheets credentials.
 In your terminal, navigate to the project root and run:
 
 ```bash
-cd /home/ujai/Projek/Rahmat/majlis-rsvp
+cd your-project-folder
 cp .env.example .env.local
 ```
 

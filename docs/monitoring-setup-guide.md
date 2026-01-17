@@ -49,7 +49,7 @@ npm install @vercel/analytics
 
 **Add to your app:**
 
-Create or update `/home/bajai/Projek/aqiqah-rahmat/app/layout.tsx`:
+Create or update `app/layout.tsx`:
 
 ```typescript
 import { Analytics } from '@vercel/analytics/react';
@@ -237,7 +237,7 @@ curl https://your-production-domain.com/api/health/sheets
 
 ### Create a Monitoring Page (Optional)
 
-Create `/home/bajai/Projek/aqiqah-rahmat/app/admin/monitoring/page.tsx`:
+Create `app/admin/monitoring/page.tsx`:
 
 ```typescript
 'use client';
@@ -347,7 +347,7 @@ export default function MonitoringPage() {
 
 Create a simple uptime monitor:
 
-**Create:** `/home/bajai/Projek/aqiqah-rahmat/scripts/monitor-health.ts`
+**Create:** `scripts/monitor-health.ts`
 
 ```typescript
 #!/usr/bin/env tsx
@@ -392,7 +392,7 @@ checkHealth();
 crontab -e
 
 # Add this line to check every 5 minutes
-*/5 * * * * cd /home/bajai/Projek/aqiqah-rahmat && tsx scripts/monitor-health.ts
+*/5 * * * * cd your-project-folder && tsx scripts/monitor-health.ts
 ```
 
 ---
@@ -553,7 +553,7 @@ Use Vercel Analytics to track real user performance.
 
 Set up automated Lighthouse audits:
 
-**Create:** `/home/bajai/Projek/aqiqah-rahmat/.github/workflows/lighthouse.yml`
+**Create:** `.github/workflows/lighthouse.yml`
 
 ```yaml
 name: Lighthouse CI
@@ -577,7 +577,7 @@ jobs:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
 ```
 
-**Create:** `/home/bajai/Projek/aqiqah-rahmat/lighthouserc.json`
+**Create:** `lighthouserc.json`
 
 ```json
 {

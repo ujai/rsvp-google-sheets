@@ -13,7 +13,7 @@ Get your RSVP system up and running in 15 minutes!
 ### 1. Install Dependencies (2 min)
 
 ```bash
-cd /home/ujai/Projek/Rahmat/majlis-rsvp
+cd your-project-folder
 npm install
 ```
 
@@ -60,7 +60,7 @@ npm install
 
 Copy the example file:
 ```bash
-cp .env.local.example .env.local
+cp .env.example .env.local
 ```
 
 Open `.env.local` and fill in:

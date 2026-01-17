@@ -57,7 +57,7 @@ Production Environment
 
 ### Development: .env.local
 
-**Location**: Project root directory (`/home/ujai/Projek/Rahmat/majlis-rsvp/.env.local`)
+**Location**: Project root directory (`your-project-folder/.env.local`)
 
 **Purpose**: Local development configuration
 
@@ -67,7 +67,7 @@ Production Environment
 
 **Creation**:
 ```bash
-cd /home/ujai/Projek/Rahmat/majlis-rsvp
+cd your-project-folder
 cp .env.example .env.local
 ```
 
@@ -446,7 +446,7 @@ Follow the detailed instructions in [Google Sheets Setup Guide](./google-sheets-
 ### Step 2: Create .env.local File
 
 ```bash
-cd /home/ujai/Projek/Rahmat/majlis-rsvp
+cd your-project-folder
 cp .env.example .env.local
 ```
 

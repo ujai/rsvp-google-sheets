@@ -72,7 +72,7 @@ This will:
 
 Navigate to your project directory:
 ```bash
-cd /home/bajai/Projek/aqiqah-rahmat
+cd your-project-folder
 ```
 
 Initialize Vercel project:
