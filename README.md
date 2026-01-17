@@ -34,7 +34,7 @@ Most RSVP systems require a database, which means paying for hosting or managing
 
 ```bash
 # 1. Clone and install
-git clone https://github.com/yourusername/rsvp-google-sheets.git
+git clone https://github.com/ujai/rsvp-google-sheets.git
 cd rsvp-google-sheets
 npm install
 
